@@ -107,8 +107,8 @@ private extension ForegroundView {
             let label = FadeOutLabel(frame: labelFrame)
             label.text = meter.title.uppercased()
             label.textAlignment = .right
-            label.font = UIFont.boldSystemFont(ofSize: 20.0)
-            label.textColor = meter.descriptionLabelColor
+            label.font = graph.meters[index].titleFont
+            label.textColor = meter.titleColor
             self.addSubview(label)
             ringDescriptionLabels.append(label)
         }

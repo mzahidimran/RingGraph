@@ -72,7 +72,7 @@ private extension RignGraphPainter {
     
     func drawBackgroundRing(radius: CGFloat, meter: RingMeter) {
         let color = meter.backgroundColor.cgColor
-        context.setLineWidth(geometry.ringWidth)
+        context.setLineWidth(CGFloat(calculatePercentage(value: Double(geometry.ringWidth), percentageVal: 70)))
         context.setLineCap(CGLineCap.round)
         context.setStrokeColor(color)
         context.addArc(center: geometry.centerPoint, radius: radius, startAngle: 0, endAngle: fullCircleRadians, clockwise: false)
@@ -116,4 +116,9 @@ private extension RignGraphPainter {
         clipRect.size.width = halfWidth + halfRingWidth
         return clipRect
     }
+}
+
+public func calculatePercentage(value:Double,percentageVal:Double)->Double{
+    let val = value * percentageVal
+    return val / 100.0
 }

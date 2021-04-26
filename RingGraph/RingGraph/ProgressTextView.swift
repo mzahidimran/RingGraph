@@ -63,18 +63,25 @@ private extension ProgressTextView {
     }
     
     func setupSubviewVisuals(ringMeter: RingMeter) {
-        counterLabel.font = UIFont.systemFont(ofSize: 90)
-        counterLabel.text = String(ringMeter.value)
+        counterLabel.font = ringMeter.titleFont
+        var value = ""
+        if floor(ringMeter.value) == ringMeter.value {
+            value = "\(Int(ringMeter.value))"
+        } else
+        {
+            value = String(format: "%.01f", ringMeter.value)
+        }
+        counterLabel.text = value
         
-        descriptionLabel.font = UIFont.systemFont(ofSize: 28)
-        descriptionLabel.text = "OF \(ringMeter.maxValue) \(ringMeter.title.uppercased())" //TODO lozalize
+        
+        descriptionLabel.font = ringMeter.descriptionFont
+        descriptionLabel.text = ringMeter.title //TODO lozalize
         
         counterLabel.textAlignment = .center
         descriptionLabel.textAlignment = .center
         
-        let color = UIColor.white
-        counterLabel.textColor = color
-        descriptionLabel.textColor = color
+        counterLabel.textColor = ringMeter.titleColor
+        descriptionLabel.textColor = ringMeter.descriptionLabelColor
         
         counterHostView.clipsToBounds = true
     }
